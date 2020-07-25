@@ -7,7 +7,7 @@
  ******** (已调整)以下为 tamperJS 自动生成的 rewrite 相关信息，可能需要根据情况适当调整 ********
 
 [rewrite]
-https:\/\/www\.google\.com\/(m|search) url script-response-body Endless_Google.user.js
+https:\/\/www\.google\.com\/(m|search) url script-response-body https://raw.githubusercontent.com/elecV2/QuantumultX-Tools/master/google/Endless_Google.user.js
 
 [mitm]
 hostname = www.google.com
