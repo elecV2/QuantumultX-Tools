@@ -5,7 +5,10 @@
  * 制作：elecV2
  *
  ******** （已修改）以下为 tamperJS 自动生成的 rewrite 相关信息，可能需要根据情况适当调整 ********
-
+ 
+**********************
+QuantumultX 脚本配置:
+**********************
 [rewrite]
 // 先重写到桌面版
 ^https:\/\/www\.zhihu\.com\/ url request-header (\r\n)User-Agent:.+(\r\n) request-header $1User-Agent: Mozilla/5.0 (Windows Phone 10)$2
@@ -13,7 +16,19 @@
 ^https:\/\/www\.zhihu\.com\/question url script-response-body https://raw.githubusercontent.com/elecV2/QuantumultX-Tools/master/zhihux.user.js
 
 [mitm]
-www.zhihu.com
+hostname= www.zhihu.com
+
+**********************
+Surge 4.2.0+ 脚本配置:
+**********************
+[Header Rewrite]
+^https:\/\/www\.zhihu\.com\/ header-replace User-Agent "Mozilla/5.0 (Windows Phone 10)"
+
+[Script]
+zhihux = type=http-response,pattern=^https:\/\/www\.zhihu\.com\/question,script-path=https://raw.githubusercontent.com/elecV2/QuantumultX-Tools/master/zhihux.user.js,requires-body=true
+
+[mitm]
+hostname= www.zhihu.com
 
  ********
  * 工具: tamperJS BY @elecV2
