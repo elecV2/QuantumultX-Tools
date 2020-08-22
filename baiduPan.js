@@ -1,8 +1,6 @@
 /**
  * 名称：baiduPan.js
  * 说明：百度网盘手机网页优化
- * 
- * 制作：elecV2
  *
  ******** (已修改) 以下为 tamperJS 自动生成的 rewrite 相关信息，可能需要根据情况适当调整 ********
 
@@ -12,7 +10,7 @@
 ^https:\/\/pan\.baidu\.com url script-response-body https://raw.githubusercontent.com/elecV2/QuantumultX-Tools/master/baiduPan.js
 
 [mitm]
-, pan.baidu.com
+pan.baidu.com
 
  ********
  * 工具: tamperJS BY @elecV2
