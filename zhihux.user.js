@@ -12,8 +12,11 @@
 // 再注入 CSS 进行优化
 ^https:\/\/www\.zhihu\.com\/question url script-response-body https://raw.githubusercontent.com/elecV2/QuantumultX-Tools/master/zhihux.user.js
 
-// 去掉知乎的中间跳转。可选，记得加 mitmhost
-https?://link.zhihu.com/\?target=(https?)%3A//(.*) url 307 $1://$2
+// 去掉知乎跳转第三方网站的中间页面。可选，记得加 mitmhost：link.zhihu.com
+^https?://link\.zhihu\.com/\?target=(https?)%3A//(.*) url 307 $1://$2
+
+// 可选。知乎专栏底部推荐阅读文章直接打开，免跳转应用商店。mitmhost：oia.zhihu.com
+^https://oia\.zhihu\.com url 307 https://zhuanlan.zhihu.com
 
 [mitm]
 www.zhihu.com
