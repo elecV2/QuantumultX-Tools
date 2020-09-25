@@ -7,6 +7,7 @@
  ******** （已修改）以下为 tamperJS 自动生成的 rewrite 相关信息，可能需要根据情况适当调整 ********
 
 [rewrite]
+// 以下规则仅对手机网页版有效，如使用APP 请勿添加
 // 先重写到桌面版
 ^https:\/\/www\.zhihu\.com\/ url request-header (\r\n)User-Agent:.+(\r\n) request-header $1User-Agent: Mozilla/5.0 (Windows Phone 10)$2
 // 再注入 CSS 进行优化
