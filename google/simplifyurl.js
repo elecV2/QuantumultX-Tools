@@ -24,7 +24,7 @@ if (!url.match(/\?/)) {
 }
 
 const qs = {
-  google: ['q','tbm','tbs','start','lr']
+  google: ['q','tbm','tbs','start','lr','nirf']
 }
 
 const qkey = []
