@@ -1,4 +1,6 @@
 /**
+ * 功能：使用TG bot 给频道或他人发信息
+ * 使用方法：
  * 先使用 https://t.me/BotFather 创建一个机器人 bot
  * 然后把 bot token 填写到下面对应位置。 然后start bot
  * chatid 可使用 https://t.me/elecV2Fun_bot，发送关键字 id 查询
