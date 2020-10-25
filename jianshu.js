@@ -8,7 +8,7 @@
 // rewrite 远程地址：https://raw.githubusercontent.com/elecV2/QuantumultX-Tools/master/jianshu.conf
 
 ---------- jianshu.conf ------------------
-host = www.jianshu.com
+hostname = www.jianshu.com
 
 // 先重写到桌面版
 ^https:\/\/www\.jianshu\.com\/p url request-header (\r\n)User-Agent:.+(\r\n) request-header $1User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36$2
@@ -24,7 +24,7 @@ let body = $response.body
 
 if (/<\/html>|<\/body>/.test(body)) {
   body = body.replace('</head>', `<style type="text/css">
-*{max-width:100%!important;box-sizing:border-box!important;}.side-tool, #note-fixed-ad-container, #free-reward-panel, .show-foot, .meta-bottom, aside, nav, ._13lIbp, ._3Pnjry, ._7hb9O4, ._1kCBjS, ._3tCVn5, .-pXE92, .note-graceful-button, .call-app-btn, .recommend-ad{display:none!important}._3VRLsv, .ouvJEz{padding: 12px}._gp-ck, .W2TSX_{margin: 0!important;}
+*{max-width:100%!important;box-sizing:border-box!important;}.side-tool, #note-fixed-ad-container, #free-reward-panel, .show-foot, .meta-bottom, aside, nav, ._13lIbp, ._3Pnjry, ._7hb9O4, ._1kCBjS, ._3tCVn5, .-pXE92, .note-graceful-button, .call-app-btn, .recommend-ad, ._2xr8G8{display:none!important}._3VRLsv, .ouvJEz{padding: 12px}._gp-ck, .W2TSX_{margin: 0!important;}
 </style></head>`)
 
   console.log('添加 tamperJS：jianshu.js')
