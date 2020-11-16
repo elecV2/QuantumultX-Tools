@@ -5,7 +5,7 @@
  ******** Quantumult X conf ********
 // 规则仅对手机网页版有效，如使用APP 请勿添加
 
-// rewrite 远程地址：https://raw.githubusercontent.com/elecV2/QuantumultX-Tools/master/jianshu.conf
+// rewrite 远程地址：https://raw.githubusercontent.com/elecV2/QuantumultX-Tools/master/betterweb/jianshu.conf
 
 ---------- jianshu.conf ------------------
 hostname = www.jianshu.com
@@ -13,7 +13,7 @@ hostname = www.jianshu.com
 // 先重写到桌面版
 ^https:\/\/www\.jianshu\.com\/p url request-header (\r\n)User-Agent:.+(\r\n) request-header $1User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36$2
 // 再注入 CSS 进行优化
-^https:\/\/www\.jianshu\.com\/p url script-response-body https://raw.githubusercontent.com/elecV2/QuantumultX-Tools/master/jianshu.js
+^https:\/\/www\.jianshu\.com\/p url script-response-body https://raw.githubusercontent.com/elecV2/QuantumultX-Tools/master/betterweb/jianshu.js
 -------------
 
  ********
