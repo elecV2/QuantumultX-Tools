@@ -7,7 +7,7 @@
 // https://raw.githubusercontent.com/elecV2/QuantumultX-Tools/master/dianx/dianx.cookie.conf
 // 
 // cookie 获取条件：金豆数量大于 400，以及上午 10 点前。
-// 打开电信营业厅，我->我的金豆->2元话费（热门兑换）->立即兑换->兑换。如果设置没问题，会弹出 cookie 获取成功的提醒。然后注释掉复写规则，防止重复弹窗。
+// 打开电信营业厅，我->(已)签到->2元话费（热门兑换）->立即兑换->兑换。如果设置没问题，会弹出 cookie 获取成功的提醒。然后注释掉复写规则，防止重复弹窗。
 // 
 // 接着设置定时任务，在 10 点整进行话费兑换。每月 5 次兑换机会，下面的 cron 表示差不多每 3 天尝试兑换一次，可根据个人情况进行适当调整。
 // 0 10 */3 * * https://raw.githubusercontent.com/elecV2/QuantumultX-Tools/master/dianx/dianx.js, tag=电信金豆兑换话费, img-url=https://raw.githubusercontent.com/elecV2/QuantumultX-Tools/master/dianx/dianx.png, enabled=true
@@ -21,7 +21,7 @@ const COOKIELIST = {
 
 const cookieMod = {
   get(key){
-    if (COOKIELIST[key]) return COOKIELIST[key]
+    if (COOKIELIST && COOKIELIST[key]) return COOKIELIST[key]
     if (typeof $store !== "undefined") return $store.get(key)
     if (typeof $prefs !== "undefined") return $prefs.valueForKey(key)
     if (typeof $persistentStore !== "undefined") return $persistentStore.read(key)
@@ -67,6 +67,7 @@ const simpPost = function(req, type) {
     })
   }
 }
+// if (typeof window === "object") window.$done=(obj)=>console.log('done li ge done', obj)
 
 const evNotify = function(title, message, url) {
   if (typeof $feed !== "undefined") return $feed.push(title, message, url)
@@ -74,10 +75,6 @@ const evNotify = function(title, message, url) {
   if (typeof $notification !== "undefined") return $notification.post(title, '', message, url)
   console.log(title, message, url)
 }
-
-// if (typeof $done === "undefined") {
-//   function $done(obj) { console.log('done li ge done', obj) }
-// }
 
 /*********** 程序主要运行部分 ***************/
 if (typeof $request === "undefined") {
