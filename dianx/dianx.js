@@ -19,6 +19,9 @@ const COOKIELIST = {
   'dianx_body': ``
 }
 
+// 是否在日志中显示出 cookie 信息。是： true , 否： false (默认)
+const bShowCookie = false
+
 const cookieMod = {
   get(key){
     if (COOKIELIST && COOKIELIST[key]) return COOKIELIST[key]
@@ -99,12 +102,17 @@ function sJson(str) {
   }
 }
 
+function showCookie() {
+  Object.keys(COOKIELIST).forEach(c=>console.log('KEY:' + c + '\nVAULE:' + cookieMod.get(c)))
+}
+
 function saveCookie() {
   if ($request.headers && $request.url.match(/api\/exchange\/consume/)) {
     // console.log($request)
     if (cookieMod.put(JSON.stringify($request.headers), 'dianx_headers') && cookieMod.put($request.body, 'dianx_body')){
       console.log('金豆兑换话费相关 cookie 获取成功')
       evNotify('🎭 金豆兑换话费 cookie 获取成功！', '请注释掉相关复写规则。\n每天 10 点可兑换话费，请提前设置好定时任务')
+      bShowCookie && showCookie()
     }
   } else {
     console.log('金豆兑换话费相关 cookie 获取失败')
@@ -128,6 +136,7 @@ function exchange(headers, body) {
     message = (err.error || err.message || err) + '\n如超时并不表示兑换失败，以实际是否扣除金豆为准'
   }).finally(()=>{
     evNotify(title, message + '\n如兑换成功，通常半小时内会收到充值成功的短信')
+    bShowCookie && showCookie()
     $done({})
   })
 }
