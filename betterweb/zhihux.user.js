@@ -3,21 +3,23 @@
  * 参考：https://userstyles.org/styles/userjs/167694/zhihux.user.js
  * 
  * 制作：elecV2
- *
  ******** （已修改）以下为 tamperJS 自动生成的 rewrite 相关信息，可能需要根据情况适当调整 ********
-
 [rewrite]
+// 一键订阅：https://raw.githubusercontent.com/elecV2/QuantumultX-Tools/master/betterweb/zhihu.conf
+
+// 手动添加：
 // 以下规则仅对手机网页版有效，如使用APP 请勿添加
 // 先重写到桌面版
 ^https:\/\/www\.zhihu\.com\/ url request-header (\r\n)User-Agent:.+(\r\n) request-header $1User-Agent: Mozilla/5.0 (Windows Phone 10)$2
 // 再注入 CSS 进行优化
-^https:\/\/www\.zhihu\.com\/question url script-response-body https://raw.githubusercontent.com/elecV2/QuantumultX-Tools/master/zhihux.user.js
+^https:\/\/www\.zhihu\.com\/question url script-response-body https://raw.githubusercontent.com/elecV2/QuantumultX-Tools/master/betterweb/zhihux.user.js
 
 // 去掉知乎跳转第三方网站的中间页面。可选，记得加 mitmhost：link.zhihu.com
 ^https?://link\.zhihu\.com/\?target=(https?)%3A//(.*) url 307 $1://$2
 
 // 可选。知乎专栏底部推荐阅读文章直接打开，免跳转应用商店。mitmhost：oia.zhihu.com
-^https://oia\.zhihu\.com url 307 https://zhuanlan.zhihu.com
+^https:\/\/oia\.zhihu\.com\/answers\/([0-9]+)\?.* url 307 https://www.zhihu.com/answer/$1
+^https:\/\/oia\.zhihu\.com\/articles\/([0-9]+)\?.* url 307 https://zhuanlan.zhihu.com/p/$1
 
 [mitm]
 www.zhihu.com
