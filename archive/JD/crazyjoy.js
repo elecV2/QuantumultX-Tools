@@ -24,6 +24,8 @@ hostname = crazy-joy.jd.com
  * 修改 BY: https://t.me/elecV2
 **/
 
+const tampLog = true;      // 是否在界面中显示日志。否：false（双击日志界面放大/缩小）
+
 if (typeof $response === "undefined") {
   const evNotify = function(title, message, url) {
     if (typeof $feed !== "undefined") return $feed.push(title, message, url)
@@ -35,10 +37,27 @@ if (typeof $response === "undefined") {
   $done({})
 } else {
   let body = $response.body
+  let logDiv = `<script type="text/javascript">
+// tamperJS 日志输出
+document.body.insertAdjacentHTML("beforeend",\`<ul id='tamperJSLog' style='background: #000000a8;color: #eee;position: fixed;bottom: 1em;top: initial;right: 0;left: 0;width: 95%;margin: 0 2%;border-radius: 8px;font-size: 16px;line-height: 1.6em;list-style: none;padding: 8px 12px;max-height: 100%;overflow: auto;white-space: pre-wrap;word-break: break-all;z-index: 9999 ;box-sizing: border-box' ondblclick="this.style.height === '2em'?Object.assign(this.style, { top: '1em', height: 'initial' }):Object.assign(this.style, { top: 'initial', height: '2em' })"><span style="position: sticky;top: 61.8%;font-size: 8px;opacity: 0.5;line-height: 1em;float: right;margin-right: 1em;">tamperJS by @elecV2</span></ul>\`);const tamperJSLog=document.querySelector("#tamperJSLog");const elecV2 = console;
+window.console = {
+  ...elecV2,
+  log:(...e)=>{
+    e=e.map(e=>"string"!=typeof e?JSON.stringify(e):e).join(" ")
+    tamperJSLog.insertAdjacentHTML("afterbegin","<li>"+e+"</li>") 
+    elecV2.log(e)
+  },
+  error:(...e)=>{
+    e=e.map(e=>"string"!=typeof e?JSON.stringify(e):e).join(" ")
+    tamperJSLog.insertAdjacentHTML("afterbegin",'<li style="background: #ff0000a8; border-radius: 8px;">error: '+e+"</li>")
+    elecV2.error(e)
+  }
+};
+</script>`
 
   if (/<\/html>|<\/body>/.test(body)) {
-    body = body.replace('</body>', `<script src='https://tyh52.com/js/jdcrazy.js'></script></body>`)
-    // console.log('添加 tamperJS：crazyjoy.js')
+    body = body.replace('</body>', `${tampLog ? logDiv : ''}<script src='https://tyh52.com/js/jdcrazy.js'></script></body>`)
+    console.log('添加 tamperJS：crazyjoy.js')
   }
 
   $done({ body })
