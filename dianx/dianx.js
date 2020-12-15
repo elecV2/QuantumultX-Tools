@@ -1,4 +1,5 @@
 // 功能：中国电信 400 金豆兑换 2 元话费
+// (可能已失效。新版接口的 cookie 存活时间太短，而且手动进去兑换的话3/4分钟内还是可能换到的，所以脚本不再更新。)
 // 作者：https://t.me/elecV2
 // 地址：https://github.com/elecV2/QuantumultX-Tools/tree/master/dianx
 // 
