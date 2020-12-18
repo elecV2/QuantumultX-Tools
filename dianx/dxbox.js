@@ -70,11 +70,11 @@ const evNotify = function(title, message, url) {
   if (typeof $feed !== "undefined") return $feed.push(title, message, url)
   if (typeof $notify !== "undefined") return $notify(title, '', message, url)
   if (typeof $notification !== "undefined") return $notification.post(title, '', message, url)
-  console.log(title, message, url)
+  console.log(`${title}\n${message}\n${url}`)
 }
 
 /*********** 程序主要运行部分 ***************/
-bShowCookie && showCookie()
+bShowCookie && showCookie('电信整点开宝箱')
 if (typeof $request === "undefined") {
   const dcookie = cookieMod.get('dxbox_cookie')
   const dbody  = cookieMod.get('dxbox_body')
@@ -113,13 +113,15 @@ if (typeof $request === "undefined") {
             nextFlag = false
           }
         })
+      } else {
+        message += '\n查询总金豆有误，' + body.msg
+        console.log(JSON.stringify(body))
       }
     }).catch(e=>{
       message += '\n' + (e.message || e)
       console.log(message)
     }).finally(()=>{
       evNotify(`🎭 开启 ${ hours } 点宝箱`, message)
-      console.log(`🎭 开启 ${ hours } 点宝箱\n${message}`)
       $done()
     })
   }
@@ -144,7 +146,8 @@ function saveCookie() {
   $done({})
 }
 
-function showCookie() {
+function showCookie(title) {
+  console.log(title + ' 相关 COOKIE：')
   Object.keys(COOKIELIST).forEach(c=>console.log('\nKEY: ' + c + '\nVAULE: ' + cookieMod.get(c)))
 }
 
