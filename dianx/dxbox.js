@@ -67,6 +67,7 @@ const simpPost = function(req, type) {
 }
 
 const evNotify = function(title, message, url) {
+  if (!url) url = 'ctclient://startapp'
   if (typeof $feed !== "undefined") return $feed.push(title, message, url)
   if (typeof $notify !== "undefined") return $notify(title, '', message, url)
   if (typeof $notification !== "undefined") return $notification.post(title, '', message, url)
@@ -114,7 +115,7 @@ if (typeof $request === "undefined") {
           }
         })
       } else {
-        message += '\n查询总金豆有误，' + body.msg
+        message += '\n查询总金豆有误，' + body.msg + '\n点击通知打开电信营业厅'
         console.log(JSON.stringify(body))
       }
     }).catch(e=>{
