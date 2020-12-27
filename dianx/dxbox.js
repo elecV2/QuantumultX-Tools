@@ -69,8 +69,8 @@ const simpPost = function(req, type) {
 const evNotify = function(title, message, url) {
   if (!url) url = 'ctclient://startapp'
   if (typeof $feed !== "undefined") return $feed.push(title, message, url)
-  if (typeof $notify !== "undefined") return $notify(title, '', message, url)
-  if (typeof $notification !== "undefined") return $notification.post(title, '', message, url)
+  if (typeof $notify !== "undefined") return $notify(title, '', message, {'open-url': url})
+  if (typeof $notification !== "undefined") return $notification.post(title, '', message, { url })
   console.log(`${title}\n${message}\n${url}`)
 }
 
