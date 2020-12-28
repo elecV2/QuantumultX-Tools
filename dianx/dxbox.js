@@ -1,10 +1,10 @@
 /**
  * 电信营业厅整点开宝箱。（预计每天可得 1300 金豆）
  * 作者：https://t.me/elecV2
- * 地址：https://github.com/elecV2/QuantumultX-Tools/tree/master/dianx/dxbox.js
+ * 地址：https://raw.githubusercontent.com/elecV2/QuantumultX-Tools/master/dianx/dxbox.js
  * 
  * 活动地址：电信营业厅APP 我->整点开宝箱或者我->右上角消息->优惠->金豆省钱攻略
- * 活动时间：~ 12.31
+ * 活动时间：~ 2021.03.31 (具体以官方公告为准)
  * 
  * COOKIE 获取：
  * 添加重写订阅(QuanX)： https://raw.githubusercontent.com/elecV2/QuantumultX-Tools/master/dianx/dxbox.cookie.conf
@@ -15,8 +15,8 @@
  * 
  * https:\/\/alipaymini\.189\.cn:8043\/treasureBox\/queryUserActivityInfo url script-request-body https://raw.githubusercontent.com/elecV2/QuantumultX-Tools/master/dianx/dxbox.js
  * 
- * 定时任务： 36 0 8,12,13,14,18,19,20,21,22,23 * * * https://raw.githubusercontent.com/elecV2/QuantumultX-Tools/master/dianx/dxbox.js, tag=整点开宝箱, img-url=https://raw.githubusercontent.com/elecV2/QuantumultX-Tools/master/dianx/dianx.png, enabled=true
- * 整点过后 5 分钟内都可以开启宝箱，稍微延迟一点，避免服务器短时间内无法处理大量请求开启失败。如失败，再手动运行一次脚本。
+ * 定时任务： 36 0 8,12,13,14,18,19,20,21,22,23 * * * https://raw.githubusercontent.com/elecV2/QuantumultX-Tools/master/dianx/dxbox.js, tag=整点开宝箱, img-url=https://raw.githubusercontent.com/elecV2/QuantumultX-Tools/master/dianx/dxbox.png, enabled=true
+ * 整点过后 5 分钟内都可以开启宝箱，稍微延迟一点，避免服务器短时间内无法处理大量请求开启失败。如失败，再手动运行一次脚本。（或者直接设置运行两次）
  */
 
 const COOKIELIST = {
@@ -24,8 +24,11 @@ const COOKIELIST = {
   'dxbox_body': ``
 }
 
-// 是否在日志中打印 cookie 信息。是：true , 否：false (默认)
-const bShowCookie = false
+const CONFIG = {
+  name: '🎭 电信整点开宝箱',
+  debug: false,        // 显示调试信息，是否打印 cookie 信息等。是：true , 否：false (默认)
+  openurl: 'ctclient://startapp',      // 点击通知栏的跳转的链接
+}
 
 const boxNo = { 'h8':10, 'h12':20, 'h13':30, 'h14':40, 'h18':50, 'h19':60, 'h20':70, 'h21':80, 'h22':90, 'h23':100 }
 
@@ -67,15 +70,15 @@ const simpPost = function(req, type) {
 }
 
 const evNotify = function(title, message, url) {
-  if (!url) url = 'ctclient://startapp'
+  CONFIG.debug && console.log(`${title}\n${message}\n${url}`)
+  if (!url) url = CONFIG.openurl
   if (typeof $feed !== "undefined") return $feed.push(title, message, url)
   if (typeof $notify !== "undefined") return $notify(title, '', message, {'open-url': url})
   if (typeof $notification !== "undefined") return $notification.post(title, '', message, { url })
-  console.log(`${title}\n${message}\n${url}`)
 }
 
 /*********** 程序主要运行部分 ***************/
-bShowCookie && showCookie('电信整点开宝箱')
+CONFIG.debug && showCookie()
 if (typeof $request === "undefined") {
   const dcookie = cookieMod.get('dxbox_cookie')
   const dbody  = cookieMod.get('dxbox_body')
@@ -142,13 +145,13 @@ function saveCookie() {
   } else fail = true
   if (fail) {
     evNotify('🎭 电信整点开宝箱相关 COOKIE 获取失败', '可能是复写匹配 URL 设置不正确。请仔细检查后再次尝试')
-    console.log('电信整点开宝箱相关 COOKIE 获取失败。\n' + $request.url + ' 并不匹配 /treasureBox\/open/')
+    console.log('电信整点开宝箱相关 COOKIE 获取失败。\n' + $request.url + ' 并不匹配 /treasureBox\/queryUserActivityInfo')
   }
   $done({})
 }
 
 function showCookie(title) {
-  console.log(title + ' 相关 COOKIE：')
+  console.log((title || CONFIG.name) + ' 相关 COOKIE：')
   Object.keys(COOKIELIST).forEach(c=>console.log('\nKEY: ' + c + '\nVAULE: ' + cookieMod.get(c)))
 }
 
