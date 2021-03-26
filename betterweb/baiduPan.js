@@ -3,8 +3,7 @@
  * 说明：百度网盘手机网页优化
  *
  ******** (已修改) 以下为 tamperJS 自动生成的 rewrite 相关信息，可能需要根据情况适当调整 ********
-QuanX rewrite 复写一键订阅:
-https://raw.githubusercontent.com/elecV2/QuantumultX-Tools/master/betterweb/baiduPan.conf
+QuanX rewrite 复写一键订阅: https://raw.githubusercontent.com/elecV2/QuantumultX-Tools/master/betterweb/baiduPan.conf
 
 或者手动添加：
 [rewrite]

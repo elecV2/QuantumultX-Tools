@@ -44,4 +44,4 @@ let path = '/m?' + qkey.join('&')
 
 if(log) console.log('simply url path to ' + path)
 
-$done({ path }) 
+$done({ path })

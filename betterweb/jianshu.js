@@ -5,7 +5,7 @@
  ******** Quantumult X conf ********
 // 规则仅对手机网页版有效，如使用APP 请勿添加
 
-// rewrite 远程地址：https://raw.githubusercontent.com/elecV2/QuantumultX-Tools/master/betterweb/jianshu.conf
+// rewrite 远程订阅地址：https://raw.githubusercontent.com/elecV2/QuantumultX-Tools/master/betterweb/jianshu.conf
 
 ---------- jianshu.conf ------------------
 hostname = www.jianshu.com
