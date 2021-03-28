@@ -1,0 +1,14 @@
+// SMZDM 手机网页显示优化
+// 规则仅对手机网页版有效，如使用APP 请勿添加
+// QuantumultX rewrite 订阅地址: https://raw.githubusercontent.com/elecV2/QuantumultX-Tools/master/betterweb/smzdm.conf
+
+hostname = post.smzdm.com, post.m.smzdm.com
+
+// post.m.smzdm.com 重定向及更改到桌面版 User-Agent
+^https:\/\/post\.m\.smzdm\.com url 307 https://post.smzdm.com
+^https:\/\/post\.smzdm\.com\/ url request-header (\r\n)User-Agent:.+(\r\n) request-header $1User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.83 Safari/537.36$2
+
+// 再注入 CSS 进行优化
+^https:\/\/post\.smzdm\.com\/ url script-response-body https://raw.githubusercontent.com/elecV2/QuantumultX-Tools/master/betterweb/smzdm.res.js
+
+// 更新频道: https://t.me/elecV2
