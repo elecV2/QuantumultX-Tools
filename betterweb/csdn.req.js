@@ -12,7 +12,7 @@ hostname = blog.csdn.net, *.openinstall.io
 ^https:\/\/blog\.csdn\.net\/ url request-header (\r\n)User-Agent:.+(\r\n) request-header $1User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.83 Safari/537.36$2
 
 // 再注入 CSS 进行优化
-^https:\/\/blog\.csdn\.net\/ url script-response-body https://raw.githubusercontent.com/elecV2/QuantumultX-Tools/master/betterweb/csdn.res.js
+^https:\/\/blog\.csdn\.net\/.*\/article\/details url script-response-body https://raw.githubusercontent.com/elecV2/QuantumultX-Tools/master/betterweb/csdn.res.js
 
 // 免跳转应用商店(也可以直接 filter 屏蔽 openinstall.io)
 ^https:\/\/wvhzpj\.openinstall\.io\/ulink url script-echo-response https://raw.githubusercontent.com/elecV2/QuantumultX-Tools/master/betterweb/csdn.req.js

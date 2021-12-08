@@ -12,7 +12,7 @@ hostname = blog.csdn.net, *.openinstall.io
 ^https:\/\/blog\.csdn\.net\/ url request-header (\r\n)User-Agent:.+(\r\n) request-header $1User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.83 Safari/537.36$2
 
 // 再注入 CSS 进行优化
-^https:\/\/blog\.csdn\.net\/ url script-response-body https://raw.githubusercontent.com/elecV2/QuantumultX-Tools/master/betterweb/csdn.res.js
+^https:\/\/blog\.csdn\.net\/.*\/article\/details url script-response-body https://raw.githubusercontent.com/elecV2/QuantumultX-Tools/master/betterweb/csdn.res.js
 
 // 免跳转应用商店(也可以直接 filter 屏蔽 openinstall.io)
 ^https:\/\/wvhzpj\.openinstall\.io\/ulink url script-echo-response https://raw.githubusercontent.com/elecV2/QuantumultX-Tools/master/betterweb/csdn.req.js
@@ -39,7 +39,7 @@ if (typeof $response !== 'undefined') {
       logshow: cookieMod.get('csdn_log_show') === 'false' ? false : true,   // 是否显示 JS 注入成功的 log。默认 true: 显示
     }
 
-    body = body.replace('</head>', `<style type="text/css">*{min-width: initial !important;box-sizing:border-box}html{overflow-y:auto!important}body{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;position:absolute!important;top:0!important;width: 100%;}.more-toolbox,.blog-footer-bottom,.csdn-side-toolbar,.slide-content-box,.blog-tags-box,.operating,#blog_detail_zk_collection,.article-copyright,#csdn-toolbar, aside, .tool-box,.template-box${ config.recommendblock ? ',.recommend-box,.recommend-tit-mod' : '' }{display:none !important}main,.content{width:100% !important}.blog_title_box{width:unset !important}#mainBox {margin-left: 0;max-width: 100%;}.blog-content-box {padding: 0 8px !important;}.hljs-ln{overflow-x: auto !important;display: flex;flex-wrap: wrap;}.htmledit_views code ol li {display: inline-flex;width: 100%;}.article-type-img {position: absolute;right: 0;margin-right: 0 !important;}.follow-nickName, .time, .read-count {margin: 4px !important;}.article-bar-top{align-items: center;}</style></head>`)
+    body = body.replace('</head>', `<style type="text/css">*{min-width: initial !important;box-sizing:border-box}html{overflow-y:auto!important}body{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;position:absolute!important;top:0!important;width: 100%;}.more-toolbox,.blog-footer-bottom,.csdn-side-toolbar,.slide-content-box,.blog-tags-box,.operating,#blog_detail_zk_collection,.article-copyright,#csdn-toolbar, aside, .tool-box,.template-box,.item-m,.dec,.more,.tool-item${ config.recommendblock ? ',.recommend-box,.recommend-tit-mod' : '' }{display:none !important}main,.content{width:100% !important}.blog_title_box{width:unset !important}#mainBox {margin-left: 0;max-width: 100%;}.blog-content-box,.main_father{padding: 2px 0 0 4px!important;}.hljs-ln{overflow-x: auto !important;display: flex;flex-wrap: wrap;}.htmledit_views code ol li {display: inline-flex;width: 100%;}.article-type-img {position: absolute;right: 0;margin-right: 0!important;background: #de3e31d6;border-radius: 15px 5px 5px 15px;}.time{position: absolute!important;top:-1.8em;right:0;}.article-bar-top{align-items: center;}</style></head>`)
 
     if (config.logshow) {
       console.log('CSDN 手机网页优化')

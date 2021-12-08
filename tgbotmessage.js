@@ -1,10 +1,10 @@
 /**
  * 功能：使用TG bot 给频道或他人发信息
  * 使用方法：
- * 先使用 https://t.me/BotFather 创建一个机器人 bot
- * 然后把 bot token 填写到下面对应位置。 然后start bot
- * chatid 可使用 https://t.me/elecV2Fun_bot，发送关键字 id 查询
- * 如果要给别人发信息，需要知道对方 chatid，并且对方已开启了你的 bot
+ * 先使用 https://t.me/BotFather 创建一个机器人，获取 bot token
+ * 然后获取目标用户的 chatid，填写到下面对应位置。然后start bot
+ *
+ * 如果要发送到频道，先将机器人拉到频道并给予管理员权限
  *
  * cron  8 8 8 * * * tgbotmessage.js
  *
@@ -12,8 +12,8 @@
 
 
 const CONFIG = {
-  chatid: '8xxxxxxxxx',       // 接受信息的用户 id. 
-  token: 'xxxxxxxxxxxxxxxxxx'     // tg bot took
+  chatid: '8xxxxxxxxxxxxx',       // 接受信息的用户 id
+  token: 'xxxxxxxxxxxxxxxxxx'     // tg bot token
 }
 
 let message = `[必应随机壁纸](https://bing.ioliu.cn/v1/rand?${Date.now()})`   // api 来源： https://github.com/xCss/bing
