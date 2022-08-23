@@ -5,7 +5,7 @@
  * 更新: 2022-08-22 19:56
  **********
 [rewrite]
-// 一键订阅: https://raw.githubusercontent.com/elecV2/QuantumultX-Tools/master/betterweb/stackoverflow.conf
+// 一键订阅: https://raw.githubusercontent.com/elecV2/QuantumultX-Tools/master/betterweb/stackoverflow.snippet
 
 // 或者手动添加:
 // 注入 CSS 进行优化
