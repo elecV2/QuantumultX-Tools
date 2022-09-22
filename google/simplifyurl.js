@@ -1,10 +1,11 @@
 /**
  * simplifyurl - 移除 Google 搜索 url 中多余的参数
+ * 说明：在自动加载下一页时有问题，待修复
  ****************
  
 [rewrite]
 // 以下两种方式任选其一
-https:\/\/www\.google\.com\/(m|search).+(q=[^&]+)&.+ url script-request-header https://raw.githubusercontent.com/elecV2/QuantumultX-Tools/master/google/simplifyurl.js
+https://www\.google\.com/(m|search)\? url script-request-header https://raw.githubusercontent.com/elecV2/QuantumultX-Tools/master/google/simplifyurl.js
 
 // 307 重定向，无需 JS。缺点是不能翻页、无法查看图片/视频等其他搜索项
 // https:\/\/www\.google\.com\/(m|search).+(q=[^&]+)&.+ url 307 $1?$2
@@ -16,7 +17,10 @@ hostname = www.google.com
  * 作者: TG@elecV2
 **/
 
-const log = true
+if (typeof $request === 'undefined') {
+  console.log('脚本用于重写(rewrite) 网络请求，请勿直接运行该脚本\n问题反馈: https://t.me/elecV2')
+  typeof $done !== 'undefined' && $done()
+}
 
 const url = $request.url
 if (!url.match(/\?/)) {
@@ -27,21 +31,19 @@ const qs = {
   google: ['q', 'location', 'uule', 'hl', 'nfpr', 'filter', 'tbm', 'tbs', 'start', 'num', 'lr', 'ijn', 'nirf', 'safe']
 }
 
-const qkey = []
+let urlb = new URL(url);
 
-function getQs(url, key) {
-  let kp = url.match(key + '=[^&]+')
-  return kp ? kp[0] : null
+const skey = [];
+qs.google.forEach(key=>{
+  const v = urlb.searchParams.get(key);
+  if (v) {
+    skey.push(`${key}=${v}`);
+  }
+});
+if ([...urlb.searchParams].length !== skey.length) {
+  const path = urlb.pathname + '?' + encodeURI(skey.join('&'));
+  console.log(`${url} redirectPath to ${path}`);
+  $done({ path });
+} else {
+  $done({});
 }
-
-qs.google.forEach(sp=>{
-  let qs = getQs(url, sp)
-  if(qs) qkey.push(qs)
-})
-
-let path = '/m?' + qkey.join('&')
-// path = '/m?q=elecV2'    // 验证脚本是否生效
-
-if(log) console.log('simply url path to ' + path)
-
-$done({ path })
