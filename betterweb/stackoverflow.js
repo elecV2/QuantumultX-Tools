@@ -8,12 +8,12 @@
 // 重写规则订阅: https://raw.githubusercontent.com/elecV2/QuantumultX-Tools/master/betterweb/stackoverflow.snippet
 
 // 或者手动添加:
-^https://stackoverflow|superuser\.com/question url script-response-body https://raw.githubusercontent.com/elecV2/QuantumultX-Tools/master/betterweb/stackoverflow.js
+^https://stackoverflow|superuser|serverfault\.com/question url script-response-body https://raw.githubusercontent.com/elecV2/QuantumultX-Tools/master/betterweb/stackoverflow.js
 
 ^https://.+\.stackexchange\.com/question url script-response-body https://raw.githubusercontent.com/elecV2/QuantumultX-Tools/master/betterweb/stackoverflow.js
 
 [mitm]
-stackoverflow.com, *.stackexchange.com, superuser.com
+stackoverflow.com, *.stackexchange.com, superuser.com, serverfault.com
 
  * 备注:
  * - 理论上适用于所有 stackexchange 模板网站 https://stackexchange.com/sites
